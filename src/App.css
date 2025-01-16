@@ -1,42 +1,37 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* app.css */
+
+/* Import Tailwind base styles */
+@tailwind base;
+
+/* Import Tailwind component styles */
+@tailwind components;
+
+/* Import Tailwind utility styles */
+@tailwind utilities;
+
+/* Custom styles for your app */
+body {
+  font-family: 'Inter', sans-serif; /* Example: using a clean sans-serif font */
+  background-color: #f9fafb; /* Light background color */
+  color: #333333; /* Dark text color for readability */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.main-container {
+  @apply flex h-screen;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sidebar {
+  @apply w-64 bg-gray-800 text-white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.topbar {
+  @apply sticky top-0 z-20 bg-white shadow-md;
 }
 
-.card {
-  padding: 2em;
+.dashboard {
+  @apply p-6 bg-white rounded-lg shadow-md;
 }
 
-.read-the-docs {
-  color: #888;
+p {
+  @apply text-gray-700;
 }

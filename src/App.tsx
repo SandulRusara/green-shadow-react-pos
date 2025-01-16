@@ -1,32 +1,36 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Sidebar from "./component/Sidebar.tsx";
+import TopBar from "./component/topbar.tsx";
+import Dashboard from "./Pages/DashBoard.tsx";
 
-import './App.css'
-import {createBrowserRouter} from "react-router";
-import {RouterProvider} from "react-router/dom";
-import React from "react";
 
+const App = () => {
+    return (
+        <Router>
+            <div className="flex h-screen">
+                {/* Sidebar */}
+                <div className="w-64">
+                    <Sidebar/>
+                </div>
 
-function App() {
-    const routes = createBrowserRouter([
-        {
-            path: "",
-            element:<RootLayOut/>,
-            children:[
-                {path:'',element:<Dashboard/>},
-                {path:'/Field',element:<Field/>},
-                {path:'/Crop',element:<Crop/>},
-                {path:'/Log',element:<Log/>},
-                {path:'/Staff',element:<Staff/>},
-                {path:'/Equipment',element:<Equipment/>},
-                {path:'/Vehicle',element:<Vehicle/>},
-            ]
-        }
-    ])
+                {/* Main Content Area */}
+                <div className="flex-1 flex flex-col">
+                    {/* TopBar */}
+                    <div className="sticky top-0 z-20 bg-white shadow-md">
+                        <TopBar />
+                    </div>
 
-  return (
-    <>
-        <RouterProvider router={routes}></RouterProvider>
-    </>
-  )
-}
+                    {/* Main Dashboard Content */}
+                    <main className="p-6">
+                        <Routes>
+                            <Route path="/" element={<Dashboard />} />
 
-export default App
+                        </Routes>
+                    </main>
+                </div>
+            </div>
+        </Router>
+    );
+};
+
+export default App; // Corrected export statement
