@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Sidebar from "./component/Sidebar.tsx";
-import TopBar from "./component/topbar.tsx";
-import Dashboard from "./Pages/DashBoard.tsx";
 
+import Dashboard from "./Pages/DashBoard.tsx";
+import FieldPage from "./Pages/FieldPage.tsx";
+import TopBar from "./component/topbar.tsx";
 
 const App = () => {
     return (
@@ -10,7 +11,7 @@ const App = () => {
             <div className="flex h-screen">
                 {/* Sidebar */}
                 <div className="w-64">
-                    <Sidebar/>
+                    <Sidebar />
                 </div>
 
                 {/* Main Content Area */}
@@ -20,11 +21,11 @@ const App = () => {
                         <TopBar />
                     </div>
 
-                    {/* Main Dashboard Content */}
+                    {/* Main Content */}
                     <main className="p-6">
                         <Routes>
                             <Route path="/" element={<Dashboard />} />
-
+                            <Route path="/fields" element={<FieldPage />} />
                         </Routes>
                     </main>
                 </div>
@@ -33,4 +34,4 @@ const App = () => {
     );
 };
 
-export default App; // Corrected export statement
+export default App;
