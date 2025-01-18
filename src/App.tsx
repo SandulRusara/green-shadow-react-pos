@@ -4,6 +4,7 @@ import Sidebar from "./component/Sidebar.tsx";
 import Dashboard from "./Pages/DashBoard.tsx";
 import FieldPage from "./Pages/FieldPage.tsx";
 import TopBar from "./component/topbar.tsx";
+import Equipment from "./Pages/Equipment.tsx";
 
 const App = () => {
     return (
@@ -26,6 +27,7 @@ const App = () => {
                         <Routes>
                             <Route path="/" element={<Dashboard />} />
                             <Route path="/fields" element={<FieldPage />} />
+                            <Route path="/equipment" element={<Equipment />} />
                         </Routes>
                     </main>
                 </div>

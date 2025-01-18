@@ -85,6 +85,17 @@ const Sidebar = () => {
                     <li>
                         <Link to="/fields" className="text-lg hover:underline">Fields</Link>
                     </li>
+
+                    <li>
+                        <Link to="/equipment" className="text-lg hover:underline">Equipment</Link>
+                    </li>
+                    {/*<a*/}
+                    {/*    href="equipment"*/}
+                    {/*    id="navEquipment"*/}
+                    {/*    className="block py-2 px-3 rounded hover:bg-gray-700 hover:text-green-400"*/}
+                    {/*>*/}
+                    {/*    Equipment*/}
+                    {/*</a>*/}
                 </ul>
             </div>
         </div>
