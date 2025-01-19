@@ -106,14 +106,14 @@ export function Staff() {
               </td>
             </tr>
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">Nimal Perera</td>
+              <td className="px-6 py-4">sadul rusara</td>
               <td className="px-6 py-4">Manager</td>
               <td className="px-6 py-4">Male</td>
-              <td className="px-6 py-4">2025-01-10</td>
-              <td className="px-6 py-4">1992-05-23</td>
-              <td className="px-6 py-4">Panadura</td>
-              <td className="px-6 py-4">0778543231</td>
-              <td className="px-6 py-4">kamal@gmail.com</td>
+              <td className="px-6 py-4">2025-04-10</td>
+              <td className="px-6 py-4">1992-06-13</td>
+              <td className="px-6 py-4">maggona</td>
+              <td className="px-6 py-4">0770943231</td>
+              <td className="px-6 py-4">sanu8@gmail.com</td>
               <td className="px-6 py-4">Manager</td>
               <td className="px-6 py-4">
                 <a
@@ -126,19 +126,19 @@ export function Staff() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">Amal Perera</td>
+              <td className="px-6 py-4">sunil Perera</td>
               <td className="px-6 py-4">Manager</td>
               <td className="px-6 py-4">Male</td>
-              <td className="px-6 py-4">2025-01-10</td>
-              <td className="px-6 py-4">1992-05-23</td>
+              <td className="px-6 py-4">2025-09-10</td>
+              <td className="px-6 py-4">1992-044-23</td>
               <td className="px-6 py-4">Panadura</td>
               <td className="px-6 py-4">0778543231</td>
-              <td className="px-6 py-4">kamal@gmail.com</td>
+              <td className="px-6 py-4">sunil7@gmail.com</td>
               <td className="px-6 py-4">Manager</td>
               <td className="px-6 py-4">
                 <a
@@ -151,19 +151,19 @@ export function Staff() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">Amal Perera</td>
+              <td className="px-6 py-4">kumara</td>
               <td className="px-6 py-4">Manager</td>
               <td className="px-6 py-4">Male</td>
               <td className="px-6 py-4">2025-01-10</td>
-              <td className="px-6 py-4">1992-05-23</td>
+              <td className="px-6 py-4">1992-05-13</td>
               <td className="px-6 py-4">Panadura</td>
-              <td className="px-6 py-4">0778543231</td>
-              <td className="px-6 py-4">kamal@gmail.com</td>
+              <td className="px-6 py-4">0728543231</td>
+              <td className="px-6 py-4">kumara4@gmail.com</td>
               <td className="px-6 py-4">Manager</td>
               <td className="px-6 py-4">
                 <a
@@ -176,19 +176,19 @@ export function Staff() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">Amal Perera</td>
+              <td className="px-6 py-4">nirosha</td>
               <td className="px-6 py-4">Manager</td>
               <td className="px-6 py-4">Male</td>
-              <td className="px-6 py-4">2025-01-10</td>
-              <td className="px-6 py-4">1992-05-23</td>
+              <td className="px-6 py-4">2025-01-11</td>
+              <td className="px-6 py-4">2023-05-23</td>
               <td className="px-6 py-4">Panadura</td>
               <td className="px-6 py-4">0778543231</td>
-              <td className="px-6 py-4">kamal@gmail.com</td>
+              <td className="px-6 py-4">kumari2@gmail.com</td>
               <td className="px-6 py-4">Manager</td>
               <td className="px-6 py-4">
                 <a
@@ -201,7 +201,7 @@ export function Staff() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>

@@ -69,11 +69,11 @@ export function Equipment() {
           </thead>
           <tbody className="bg-slate-100 cursor-pointer">
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">Shovel</td>
+              <td className="px-6 py-4">andry</td>
               <td className="px-6 py-4">Mechanical</td>
               <td className="px-6 py-4">Available</td>
-              <td className="px-6 py-4">Kamal Perera</td>
-              <td className="px-6 py-4">Field 1</td>
+              <td className="px-6 py-4">sunera uthpala </td>
+              <td className="px-6 py-4">nobby</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -90,11 +90,11 @@ export function Equipment() {
               </td>
             </tr>
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">Shovel</td>
-              <td className="px-6 py-4">Mechanical</td>
+              <td className="px-6 py-4">sanny</td>
+              <td className="px-6 py-4">teclead</td>
               <td className="px-6 py-4">Available</td>
-              <td className="px-6 py-4">Kamal Perera</td>
-              <td className="px-6 py-4">Field 1</td>
+              <td className="px-6 py-4">chamara</td>
+              <td className="px-6 py-4">nobby</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -106,16 +106,16 @@ export function Equipment() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">Shovel</td>
+              <td className="px-6 py-4">logos</td>
               <td className="px-6 py-4">Mechanical</td>
               <td className="px-6 py-4">Available</td>
-              <td className="px-6 py-4">Kamal Perera</td>
-              <td className="px-6 py-4">Field 1</td>
+              <td className="px-6 py-4">Aruna nishantha</td>
+              <td className="px-6 py-4">nobby</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -127,16 +127,16 @@ export function Equipment() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">Shovel</td>
+              <td className="px-6 py-4">randy</td>
               <td className="px-6 py-4">Mechanical</td>
               <td className="px-6 py-4">Available</td>
-              <td className="px-6 py-4">Kamal Perera</td>
-              <td className="px-6 py-4">Field 1</td>
+              <td className="px-6 py-4">amodh nanditha</td>
+              <td className="px-6 py-4">nobby</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -148,16 +148,16 @@ export function Equipment() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">Shovel</td>
+              <td className="px-6 py-4">seena</td>
               <td className="px-6 py-4">Mechanical</td>
               <td className="px-6 py-4">Available</td>
-              <td className="px-6 py-4">Kamal Perera</td>
-              <td className="px-6 py-4">Field 1</td>
+              <td className="px-6 py-4"> Perera</td>
+              <td className="px-6 py-4">nobby</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -169,7 +169,7 @@ export function Equipment() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>

@@ -74,11 +74,11 @@ export function Crop() {
               <td className="px-6 py-4">
                 <img src={field} alt="" className="w-24 h-24 rounded-full" />
               </td>
-              <td className="px-6 py-4">Crop 1</td>
-              <td className="px-6 py-4">Crop 1</td>
+              <td className="px-6 py-4">Red rice</td>
+              <td className="px-6 py-4">Red rice</td>
               <td className="px-6 py-4">Fruit</td>
               <td className="px-6 py-4">Winter</td>
-              <td className="px-6 py-4">Field 1</td>
+              <td className="px-6 py-4">nobby</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -98,11 +98,11 @@ export function Crop() {
               <td className="px-6 py-4">
                 <img src={field} alt="" className="w-24 h-24 rounded-full" />
               </td>
-              <td className="px-6 py-4">Crop 2</td>
-              <td className="px-6 py-4">Crop 2</td>
+              <td className="px-6 py-4">Red rice</td>
+              <td className="px-6 py-4">Red rice</td>
               <td className="px-6 py-4">Fruit</td>
               <td className="px-6 py-4">Winter</td>
-              <td className="px-6 py-4">Field 1</td>
+              <td className="px-6 py-4">nobby </td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -114,7 +114,7 @@ export function Crop() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>
@@ -122,11 +122,11 @@ export function Crop() {
               <td className="px-6 py-4">
                 <img src={field} alt="" className="w-24 h-24 rounded-full" />
               </td>
-              <td className="px-6 py-4">Crop 3</td>
-              <td className="px-6 py-4">Crop 3</td>
+              <td className="px-6 py-4">Red rice</td>
+              <td className="px-6 py-4">Red rice</td>
               <td className="px-6 py-4">Fruit</td>
               <td className="px-6 py-4">Winter</td>
-              <td className="px-6 py-4">Field 1</td>
+              <td className="px-6 py-4">nobby</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -138,7 +138,7 @@ export function Crop() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>

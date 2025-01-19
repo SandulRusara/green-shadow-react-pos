@@ -21,7 +21,6 @@ export function Vehicle() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Vehicle added!");
     dispatch(closeModal());
   };
   return (
@@ -109,7 +108,7 @@ export function Vehicle() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>
@@ -131,7 +130,7 @@ export function Vehicle() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>
@@ -153,7 +152,7 @@ export function Vehicle() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>
@@ -175,7 +174,7 @@ export function Vehicle() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>

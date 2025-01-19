@@ -31,9 +31,9 @@ export function Barchart() {
   return (
     <div className="flex flex-col lg:flex-row gap-6 h-full">
       <div className="bg-white rounded-lg shadow-lg p-6 flex-1 lg:w-1/2">
-        <p className="text-sm text-gray-600 mb-6">January - June 2025</p>
+        <p className="text-sm text-gray-600 mb-6">January - Desember 2025</p>
         <div className="overflow-x-auto">
-          <BarChart width={800} height={300} data={chartData}>
+          <BarChart width={1800} height={400} data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="month"
