@@ -285,8 +285,8 @@ export function Staff() {
             </select>
           </div>
           <div className="flex justify-end">
-            <Savebutton>Save Staff Member</Savebutton>
-            <Updatebutton>Update Staff Member</Updatebutton>
+            <Savebutton>Save</Savebutton>
+            <Updatebutton>Update</Updatebutton>
           </div>
         </form>
       </Modal>

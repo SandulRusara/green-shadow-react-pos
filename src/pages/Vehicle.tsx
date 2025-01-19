@@ -232,8 +232,8 @@ export function Vehicle() {
             <textarea name="" id="" rows={3}></textarea>
           </div>
           <div className="flex justify-end">
-            <Savebutton>Save Vehicle</Savebutton>
-            <Updatebutton>Update Vehicle</Updatebutton>
+            <Savebutton>Save</Savebutton>
+            <Updatebutton>Update</Updatebutton>
           </div>
         </form>
       </Modal>

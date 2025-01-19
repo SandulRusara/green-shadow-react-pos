@@ -1,10 +1,10 @@
 import { Addbutton } from "../components/Addbutton";
-import { Cards } from "../components/Cards";
-import field from "../assets/field.png";
+
+import field from "../assets/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3drMTA0MDUxODUyLWltYWdlLWtwNmNlbzQ0LWtwNmRvNmJmLmpwZw.webp";
 import { Modal } from "../components/Modal";
 import { Savebutton } from "../components/Savebutton";
 import { Updatebutton } from "../components/Updatebutton";
-import { Calender } from "../components/Calender";
+
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, openModal } from "../reducers/ModalSlice";
 import { motion } from "motion/react";
@@ -24,7 +24,6 @@ export function Field() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Field added!");
     dispatch(closeModal());
   };
   return (
@@ -81,10 +80,10 @@ export function Field() {
               <td className="px-6 py-4">
                 <img src={field} alt="" className="w-24 h-24 rounded-full" />
               </td>
-              <td className="px-6 py-4">Field 1</td>
-              <td className="px-6 py-4">Location 1</td>
-              <td className="px-6 py-4">Location 1</td>
-              <td className="px-6 py-4">5000 sq. ft.</td>
+              <td className="px-6 py-4">xxxxx</td>
+              <td className="px-6 py-4">xxxxx</td>
+              <td className="px-6 py-4">xxxxx</td>
+              <td className="px-6 py-4">xxxxxx</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -104,10 +103,10 @@ export function Field() {
               <td className="px-6 py-4">
                 <img src={field} alt="" className="w-24 h-24 rounded-full" />
               </td>
-              <td className="px-6 py-4">Field 2</td>
-              <td className="px-6 py-4">Location 1</td>
-              <td className="px-6 py-4">Location 1</td>
-              <td className="px-6 py-4">5000 sq. ft.</td>
+              <td className="px-6 py-4">xxxxx</td>
+              <td className="px-6 py-4">xxxxxxxx</td>
+              <td className="px-6 py-4">xxxxx</td>
+              <td className="px-6 py-4">xxxxxx</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -127,10 +126,10 @@ export function Field() {
               <td className="px-6 py-4">
                 <img src={field} alt="" className="w-24 h-24 rounded-full" />
               </td>
-              <td className="px-6 py-4">Field 3</td>
-              <td className="px-6 py-4">Location 1</td>
-              <td className="px-6 py-4">Location 1</td>
-              <td className="px-6 py-4">5000 sq. ft.</td>
+              <td className="px-6 py-4">xxxxxx</td>
+              <td className="px-6 py-4">xxxxxxxx</td>
+              <td className="px-6 py-4">xxxxxx</td>
+              <td className="px-6 py-4">xxxxxxxxxx</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -174,8 +173,8 @@ export function Field() {
             <input type="text" required />
           </div>
           <div className="flex justify-end">
-            <Savebutton>Save Field</Savebutton>
-            <Updatebutton>Update Field</Updatebutton>
+            <Savebutton>Save</Savebutton>
+            <Updatebutton>Update</Updatebutton>
           </div>
         </form>
       </Modal>

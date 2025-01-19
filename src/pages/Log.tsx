@@ -185,8 +185,8 @@ export function Log() {
             <select name="" id=""></select>
           </div>
           <div className="flex justify-end">
-            <Savebutton>Save Log</Savebutton>
-            <Updatebutton>Update Log</Updatebutton>
+            <Savebutton>Save</Savebutton>
+            <Updatebutton>Update</Updatebutton>
           </div>
         </form>
       </Modal>
