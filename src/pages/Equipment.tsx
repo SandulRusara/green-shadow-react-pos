@@ -224,8 +224,8 @@ export function Equipment() {
             <select name="" id=""></select>
           </div>
           <div className="flex justify-end">
-            <Savebutton>Save Equipement</Savebutton>
-            <Updatebutton>Update Equipment</Updatebutton>
+            <Savebutton>Save</Savebutton>
+            <Updatebutton>Update</Updatebutton>
           </div>
         </form>
       </Modal>
