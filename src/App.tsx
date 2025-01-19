@@ -1,18 +1,15 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import "./App.css";
-import {Login} from "./pages/Login.tsx";
-import {Register} from "./pages/Register.tsx";
-import {RootLayout} from "./components/RootLayout.tsx";
-
-import {Field} from "./pages/Field.tsx";
-import {Dashboard} from "./pages/Dashboard.tsx";
-import {Crop} from "./pages/Crop.tsx";
-import {Staff} from "./pages/Staff.tsx";
-import {Equipment} from "./pages/Equipment.tsx";
-import {Log} from "./pages/Log.tsx";
-import {Vehicle} from "./pages/Vehicle.tsx";
-
-
+import { RootLayout } from "./components/RootLayout";
+import { Dashboard } from "./pages/Dashboard";
+import { Field } from "./pages/Field";
+import { Crop } from "./pages/Crop";
+import { Staff } from "./pages/Staff";
+import { Equipment } from "./pages/Equipment";
+import { Log } from "./pages/Log";
+import { Vehicle } from "./pages/Vehicle";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
 
 function App() {
     const routes = createBrowserRouter([

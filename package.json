@@ -22,6 +22,7 @@
     "react-router": "^7.1.1",
     "react-router-dom": "^7.1.1",
     "recharts": "^2.15.0",
+    "redux": "^5.0.1",
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
@@ -36,9 +37,5 @@
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.7"
-  },
-  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
-  "main": "eslint.config.js",
-  "author": "",
-  "license": "ISC"
+  }
 }
