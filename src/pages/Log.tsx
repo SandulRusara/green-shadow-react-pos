@@ -35,16 +35,6 @@ export function Log() {
         transition={{ duration: 0.5 }}
       >
       </motion.h1>
-      {/*<div className="flex flex-wrap gap-6">*/}
-      {/*  <div className="flex-grow">*/}
-      {/*    <Cards />*/}
-      {/*  </div>*/}
-      {/*  <div className="flex-shrink-0">*/}
-      {/*    <div className="relative h-full mr-10">*/}
-      {/*      <Calender />*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
       <div className="flex justify-end mt-4 mr-56">
         <Addbutton onClick={handleAddLog}>Log</Addbutton>
       </div>
