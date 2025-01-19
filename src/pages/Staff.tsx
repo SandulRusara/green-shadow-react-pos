@@ -101,7 +101,7 @@ export function Staff() {
                   href="#"
                   className="font-medium text-red-600 hover:underline ml-2"
                 >
-                  Remove
+                  Delete
                 </a>
               </td>
             </tr>
