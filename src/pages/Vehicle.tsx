@@ -69,12 +69,12 @@ export function Vehicle() {
           </thead>
           <tbody className="bg-slate-100 cursor-pointer">
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">Xxxxxx</td>
-              <td className="px-6 py-4">xxxxxx</td>
-              <td className="px-6 py-4">xxxxxx</td>
-              <td className="px-6 py-4">xxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
+              <td className="px-6 py-4">wp-5657</td>
+              <td className="px-6 py-4">van</td>
+              <td className="px-6 py-4">non</td>
+              <td className="px-6 py-4">yes</td>
+              <td className="px-6 py-4">SF 4</td>
+              <td className="px-6 py-4">on</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -91,12 +91,12 @@ export function Vehicle() {
               </td>
             </tr>
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
+              <td className="px-6 py-4">wp-9078</td>
+              <td className="px-6 py-4">car</td>
+              <td className="px-6 py-4">non</td>
+              <td className="px-6 py-4">yes</td>
+              <td className="px-6 py-4">SF 4</td>
+              <td className="px-6 py-4">on</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
@@ -113,12 +113,12 @@ export function Vehicle() {
               </td>
             </tr>
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
+              <td className="px-6 py-4">sp-6756</td>
+              <td className="px-6 py-4">bike</td>
+              <td className="px-6 py-4">non</td>
+              <td className="px-6 py-4">yes</td>
+              <td className="px-6 py-4">SF 5</td>
+              <td className="px-6 py-4">off</td>
               <td className="px-6 py-4">
                 <a
                   href="#"

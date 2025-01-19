@@ -1,10 +1,10 @@
-import { Cards } from "../components/Cards";
+
 import { Addbutton } from "../components/Addbutton";
-import field from "../assets/field.png";
+import field from "../assets/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3drMTA0MDUxODUyLWltYWdlLWtwNmNlbzQ0LWtwNmRvNmJmLmpwZw.webp";
 import { Modal } from "../components/Modal";
 import { Savebutton } from "../components/Savebutton";
 import { Updatebutton } from "../components/Updatebutton";
-import { Calender } from "../components/Calender";
+
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, openModal } from "../reducers/ModalSlice";
 import { motion } from "motion/react";
