@@ -70,10 +70,10 @@ export function Field() {
               <td className="px-6 py-4">
                 <img src={field} alt="" className="w-24 h-24 rounded-full" />
               </td>
-              <td className="px-6 py-4">xxxxx</td>
-              <td className="px-6 py-4">xxxxx</td>
-              <td className="px-6 py-4">xxxxx</td>
-              <td className="px-6 py-4">xxxxxx</td>
+              <td className="px-6 py-4">saval</td>
+              <td className="px-6 py-4">matara</td>
+              <td className="px-6 py-4">galle</td>
+              <td className="px-6 py-4">67.0</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
