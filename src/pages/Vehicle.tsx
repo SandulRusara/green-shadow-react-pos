@@ -157,12 +157,12 @@ export function Vehicle() {
               </td>
             </tr>
             <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
-              <td className="px-6 py-4">xxxxxxx</td>
+              <td className="px-6 py-4">sg-6712</td>
+              <td className="px-6 py-4">van</td>
+              <td className="px-6 py-4">non</td>
+              <td className="px-6 py-4">no</td>
+              <td className="px-6 py-4">SF 8</td>
+              <td className="px-6 py-4">on</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
