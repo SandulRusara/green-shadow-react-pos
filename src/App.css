@@ -1,37 +1,46 @@
-/* app.css */
-
-/* Import Tailwind base styles */
 @tailwind base;
-
-/* Import Tailwind component styles */
 @tailwind components;
-
-/* Import Tailwind utility styles */
 @tailwind utilities;
 
-/* Custom styles for your app */
-body {
-  font-family: 'Inter', sans-serif; /* Example: using a clean sans-serif font */
-  background-color: #f9fafb; /* Light background color */
-  color: #333333; /* Dark text color for readability */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.main-container {
-  @apply flex h-screen;
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
 
-.sidebar {
-  @apply w-64 bg-gray-800 text-white;
+::-webkit-scrollbar-thumb {
+  background: yellow;
+  border-radius: 5px;
 }
 
-.topbar {
-  @apply sticky top-0 z-20 bg-white shadow-md;
+::-webkit-scrollbar-thumb:hover {
+  background: yellow;
 }
 
-.dashboard {
-  @apply p-6 bg-white rounded-lg shadow-md;
-}
+@layer base {
+  h1 {
+    @apply text-4xl font-bold mt-8 ml-10 mb-2;
+  }
 
-p {
-  @apply text-gray-700;
+  input {
+    @apply mt-1 block w-full py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:outline-none sm:text-sm;
+  }
+
+  label {
+    @apply block text-sm font-medium text-gray-700;
+  }
+
+  h2 {
+    @apply text-xl font-bold mb-4;
+  }
+
+  select {
+    @apply mt-1 block w-full py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm;
+  }
+
+  textarea {
+    @apply mt-1 block w-full py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm;
+  }
 }
