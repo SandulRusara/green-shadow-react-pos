@@ -1,39 +1,49 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Sidebar from "./component/Sidebar.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import "./App.css";
+import {Login} from "./pages/Login.tsx";
+import {Register} from "./pages/Register.tsx";
+import {RootLayout} from "./components/RootLayout.tsx";
 
-import Dashboard from "./Pages/DashBoard.tsx";
-import FieldPage from "./Pages/FieldPage.tsx";
-import TopBar from "./component/topbar.tsx";
-import Equipment from "./Pages/Equipment.tsx";
+import {Field} from "./pages/Field.tsx";
+import {Dashboard} from "./pages/Dashboard.tsx";
+import {Crop} from "./pages/Crop.tsx";
+import {Staff} from "./pages/Staff.tsx";
+import {Equipment} from "./pages/Equipment.tsx";
+import {Log} from "./pages/Log.tsx";
+import {Vehicle} from "./pages/Vehicle.tsx";
 
-const App = () => {
+
+
+function App() {
+    const routes = createBrowserRouter([
+        {
+            path: "/",
+            element: <Login />,
+        },
+        {
+            path: "/register",
+            element: <Register />,
+        },
+        {
+            path: "",
+            element: <RootLayout />,
+            children: [
+                { path: "/dashboard", element: <Dashboard /> },
+                { path: "/field", element: <Field /> },
+                { path: "/crop", element: <Crop /> },
+                { path: "/staff", element: <Staff /> },
+                { path: "/equipment", element: <Equipment /> },
+                { path: "/log", element: <Log /> },
+                { path: "/vehicle", element: <Vehicle /> },
+            ],
+        },
+    ]);
+
     return (
-        <Router>
-            <div className="flex h-screen">
-                {/* Sidebar */}
-                <div className="w-64">
-                    <Sidebar />
-                </div>
-
-                {/* Main Content Area */}
-                <div className="flex-1 flex flex-col">
-                    {/* TopBar */}
-                    <div className="sticky top-0 z-20 bg-white shadow-md">
-                        <TopBar />
-                    </div>
-
-                    {/* Main Content */}
-                    <main className="p-6">
-                        <Routes>
-                            <Route path="/" element={<Dashboard />} />
-                            <Route path="/fields" element={<FieldPage />} />
-                            <Route path="/equipment" element={<Equipment />} />
-                        </Routes>
-                    </main>
-                </div>
-            </div>
-        </Router>
+        <>
+            <RouterProvider router={routes}></RouterProvider>
+        </>
     );
-};
+}
 
 export default App;
