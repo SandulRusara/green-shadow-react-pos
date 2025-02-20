@@ -1,4 +1,5 @@
 import { Barchart } from "../components/Barchart";
+
 import { motion } from "motion/react";
 
 export function Dashboard() {
@@ -9,17 +10,17 @@ export function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Hello Welcome To The Dashbord
+        Dashboard
       </motion.h1>
       <div className="flex flex-wrap gap-6">
         {/*<div className="flex-grow">*/}
         {/*  <Cards />*/}
         {/*</div>*/}
-        {/*<div className="flex-shrink-0">*/}
-        {/*  <div className="relative h-full mr-2">*/}
-        {/*    <Calender />*/}
-        {/*  </div>*/}
-        {/*</div>*/}
+        <div className="flex-shrink-0">
+          {/*<div className="relative h-full mr-2">*/}
+          {/*  <Calender />*/}
+          {/*</div>*/}
+        </div>
       </div>
       <div className="flex flex-col lg:flex-row gap-6">
         <Barchart />

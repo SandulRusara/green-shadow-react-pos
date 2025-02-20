@@ -1,15 +1,144 @@
+import { Cards } from "../components/Cards";
 import { Addbutton } from "../components/Addbutton";
 import { Modal } from "../components/Modal";
 import { Savebutton } from "../components/Savebutton";
 import { Updatebutton } from "../components/Updatebutton";
+import { Calender } from "../components/Calender";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, openModal } from "../reducers/ModalSlice";
 import { motion } from "motion/react";
 import { easeIn } from "motion";
+import { FuelType } from "../models/enums/FuelType";
+import { Status } from "../models/enums/StatusType";
+import { useEffect, useState } from "react";
+import { VehicleModel } from "../models/Vehicle";
+import {
+  deleteVehicle,
+  getAllVehicles,
+  saveVehicle,
+  updateVehicle,
+} from "../reducers/VehicleReducer";
+import { AppDispatch } from "../store/Store";
+import { StaffModel } from "../models/Staff";
+import { getStaffNames } from "../reducers/staffReducer";
+import Swal from "sweetalert2";
 
 export function Vehicle() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const isModalOpen = useSelector((state) => state.modal.isModalOpen);
+  const vehicles = useSelector((state) => state.vehicle);
+  const staffMembers = useSelector((state) => state.staff);
+
+  const initialVehicleState = {
+    licensePlateNumber: "",
+    category: "",
+    fuelType: "" as FuelType | "",
+    status: "" as Status | "",
+    remarks: "",
+    staffMember: "",
+  };
+
+  const [vehicle, setVehicle] = useState(initialVehicleState);
+
+  const handleAddNewVehicle = () => {
+    if (
+      !vehicle.licensePlateNumber ||
+      !vehicle.category ||
+      !vehicle.fuelType ||
+      !vehicle.status ||
+      !vehicle.remarks ||
+      !vehicle.staffMember
+    ) {
+      alert("All Fields are required!");
+      return;
+    }
+
+    const newVehicle = new VehicleModel(
+      vehicle.licensePlateNumber,
+      vehicle.category,
+      vehicle.fuelType,
+      vehicle.status,
+      vehicle.remarks,
+      vehicle.staffMember
+    );
+    dispatch(saveVehicle(newVehicle));
+    resetForm();
+    dispatch(closeModal());
+    Swal.fire({
+      icon: "success",
+      title: "Vehicle Saved!",
+      text: "Your Vehicle data has been successfully saved.",
+      confirmButtonText: "Ok",
+    });
+    dispatch(getAllVehicles());
+  };
+
+  const handleUpdateVehicle = () => {
+    if (
+      !vehicle.licensePlateNumber ||
+      !vehicle.category ||
+      !vehicle.fuelType ||
+      !vehicle.status ||
+      !vehicle.remarks ||
+      !vehicle.staffMember
+    ) {
+      alert("All Fields are required!");
+      return;
+    }
+
+    const updatedVehicle = new VehicleModel(
+      vehicle.licensePlateNumber,
+      vehicle.category,
+      vehicle.fuelType,
+      vehicle.status,
+      vehicle.remarks,
+      vehicle.staffMember
+    );
+
+    dispatch(
+      updateVehicle({
+        licenseNumber: vehicle.licensePlateNumber,
+        vehicle: updatedVehicle,
+      })
+    );
+    resetForm();
+    dispatch(closeModal());
+    Swal.fire({
+      icon: "success",
+      title: "Vehicle Updated!",
+      text: "Your Vehicle data has been successfully updated.",
+      confirmButtonText: "Ok",
+    });
+    dispatch(getAllVehicles());
+  };
+
+  const handleDelete = (licensePlateNumber: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteVehicle(licensePlateNumber));
+        dispatch(getAllVehicles());
+        Swal.fire("Deleted!", "The Vehicle has been deleted.", "success");
+      }
+    });
+  };
+
+  const handleEdit = (vehicle: VehicleModel) => {
+    dispatch(openModal());
+    setVehicle(vehicle);
+  };
+
+  const resetForm = () => {
+    setVehicle(initialVehicleState);
+  };
 
   const handleAddVehicle = () => {
     dispatch(openModal());
@@ -21,8 +150,14 @@ export function Vehicle() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Vehicle added!");
     dispatch(closeModal());
   };
+
+  useEffect(() => {
+    dispatch(getStaffNames());
+    dispatch(getAllVehicles());
+  }, [dispatch, vehicles, staffMembers]);
   return (
     <>
       <motion.h1
@@ -30,7 +165,18 @@ export function Vehicle() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
+        Vehicle
       </motion.h1>
+      {/*<div className="flex flex-wrap gap-6">*/}
+      {/*  <div className="flex-grow">*/}
+      {/*    <Cards />*/}
+      {/*  </div>*/}
+      {/*  <div className="flex-shrink-0">*/}
+      {/*    <div className="relative h-full mr-10">*/}
+      {/*      <Calender />*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       <div className="flex justify-end mt-4 mr-56">
         <Addbutton onClick={handleAddVehicle}>Vehicle</Addbutton>
       </div>
@@ -41,7 +187,7 @@ export function Vehicle() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.4, ease: easeIn }}
       >
-        <table className="w-full text-sm text-left rtl:text-right text-amber-950">
+        <table className="w-full text-sm text-left rtl:text-right text-black">
           <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
@@ -68,116 +214,41 @@ export function Vehicle() {
             </tr>
           </thead>
           <tbody className="bg-slate-100 cursor-pointer">
-            <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">wp-5657</td>
-              <td className="px-6 py-4">van</td>
-              <td className="px-6 py-4">non</td>
-              <td className="px-6 py-4">yes</td>
-              <td className="px-6 py-4">SF 4</td>
-              <td className="px-6 py-4">on</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline ml-2"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">wp-9078</td>
-              <td className="px-6 py-4">car</td>
-              <td className="px-6 py-4">non</td>
-              <td className="px-6 py-4">yes</td>
-              <td className="px-6 py-4">SF 4</td>
-              <td className="px-6 py-4">on</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline ml-2"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">sp-6756</td>
-              <td className="px-6 py-4">bike</td>
-              <td className="px-6 py-4">non</td>
-              <td className="px-6 py-4">yes</td>
-              <td className="px-6 py-4">SF 5</td>
-              <td className="px-6 py-4">off</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline ml-2"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">wp-6735</td>
-              <td className="px-6 py-4">bus</td>
-              <td className="px-6 py-4">non</td>
-              <td className="px-6 py-4">yes</td>
-              <td className="px-6 py-4">SF 1</td>
-              <td className="px-6 py-4">on</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline ml-2"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">sg-6712</td>
-              <td className="px-6 py-4">van</td>
-              <td className="px-6 py-4">non</td>
-              <td className="px-6 py-4">no</td>
-              <td className="px-6 py-4">SF 8</td>
-              <td className="px-6 py-4">on</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline ml-2"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
+            {vehicles
+              .filter(
+                (vehicle: VehicleModel, index, self) =>
+                  index ===
+                  self.findIndex(
+                    (v: VehicleModel) =>
+                      v.licensePlateNumber === v.licensePlateNumber
+                  )
+              )
+              .map((vehicle: VehicleModel) => (
+                <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
+                  <td className="px-6 py-4">{vehicle.licensePlateNumber}</td>
+                  <td className="px-6 py-4">{vehicle.category}</td>
+                  <td className="px-6 py-4">{vehicle.fuelType}</td>
+                  <td className="px-6 py-4">{vehicle.status}</td>
+                  <td className="px-6 py-4">{vehicle.remarks}</td>
+                  <td className="px-6 py-4">{vehicle.staffMember}</td>
+                  <td className="px-6 py-4">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 hover:underline"
+                      onClick={() => handleEdit(vehicle)}
+                    >
+                      Edit
+                    </a>
+                    <a
+                      href="#"
+                      className="font-medium text-red-600 hover:underline ml-2"
+                      onClick={() => handleDelete(vehicle.licensePlateNumber)}
+                    >
+                      Remove
+                    </a>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </motion.div>
@@ -188,51 +259,98 @@ export function Vehicle() {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label>License Plate Number</label>
-            <input type="text" required />
+            <input
+              type="text"
+              value={vehicle.licensePlateNumber}
+              onChange={(e) =>
+                setVehicle({ ...vehicle, licensePlateNumber: e.target.value })
+              }
+              required
+            />
           </div>
           <div className="mb-4">
             <label>Vehicle Category</label>
-            <select name="" id="">
-              <option value="" selected>
-                Select Vehicle Category
-              </option>
-              <option value="CAR">Car</option>
-              <option value="VAN">Van</option>
-              <option value="TRUCK">Truck</option>
-            </select>
+            <input
+              type="text"
+              value={vehicle.category}
+              onChange={(e) =>
+                setVehicle({ ...vehicle, category: e.target.value })
+              }
+              required
+            />
           </div>
           <div className="mb-4">
             <label>Fuel Type</label>
-            <select name="" id="">
+            <select
+              name="fuelType"
+              value={vehicle.fuelType}
+              onChange={(e) =>
+                setVehicle({ ...vehicle, fuelType: e.target.value as FuelType })
+              }
+              id=""
+            >
               <option value="" selected>
                 Select Fuel Type
               </option>
-              <option value="DIESEL">Diesel</option>
-              <option value="PETROL">Petrol</option>
-              <option value="ELECTRIC">Electric</option>
+              <option value={FuelType.DIESEL}>Diesel</option>
+              <option value={FuelType.PETROL}>Petrol</option>
+              <option value={FuelType.ELECTRIC}>Electric</option>
             </select>
           </div>
           <div className="mb-4">
             <label>Vehicle Status</label>
-            <select name="" id="">
+            <select
+              name="status"
+              value={vehicle.status}
+              onChange={(e) =>
+                setVehicle({ ...vehicle, status: e.target.value as Status })
+              }
+              id=""
+            >
               <option value="" selected>
                 Select Vehicle Status
               </option>
-              <option value="AVAILABLE">Available</option>
-              <option value="UNAVAILABLE">Unavailable</option>
+              <option value={Status.AVAILABLE}>Available</option>
+              <option value={Status.UNAVAILABLE}>Unavailable</option>
             </select>
           </div>
           <div className="mb-4">
-            <label>Relevant Staff Member</label>
-            <select name="" id=""></select>
+            <label>Remarks</label>
+            <textarea
+              name="remarks"
+              value={vehicle.remarks}
+              onChange={(e) =>
+                setVehicle({ ...vehicle, remarks: e.target.value })
+              }
+              id=""
+              rows={3}
+            ></textarea>
           </div>
           <div className="mb-4">
-            <label>Remarks</label>
-            <textarea name="" id="" rows={3}></textarea>
+            <label>Relevant Staff Member</label>
+            <select
+              name="staffMember"
+              value={vehicle.staffMember}
+              onChange={(e) =>
+                setVehicle({ ...vehicle, staffMember: e.target.value })
+              }
+              id=""
+            >
+              <option value="">Select Staff Member</option>
+              {staffMembers.map((staff: StaffModel, index) => (
+                <option key={index} value={staff}>
+                  {staff}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="flex justify-end">
-            <Savebutton>Save</Savebutton>
-            <Updatebutton>Update</Updatebutton>
+            <Savebutton handleClick={handleAddNewVehicle}>
+              Save Vehicle
+            </Savebutton>
+            <Updatebutton handleClick={handleUpdateVehicle}>
+              Update Vehicle
+            </Updatebutton>
           </div>
         </form>
       </Modal>

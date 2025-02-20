@@ -1,4 +1,4 @@
-
+import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 const chartData = [
@@ -7,13 +7,13 @@ const chartData = [
   { month: "March", desktop: 237, mobile: 120 },
   { month: "April", desktop: 73, mobile: 190 },
   { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 110 },
-  { month: "jule", desktop: 214, mobile: 90 },
-  { month: "Aug", desktop: 214, mobile: 122 },
-  { month: "Sep", desktop: 214, mobile: 167 },
+  { month: "June", desktop: 214, mobile: 140 },
+  { month: "Jul", desktop: 214, mobile: 140 },
+  { month: "Aug", desktop: 214, mobile: 140 },
+  { month: "Sep", desktop: 214, mobile: 140 },
   { month: "Oct", desktop: 214, mobile: 140 },
-  { month: "Nov", desktop: 214, mobile: 197 },
-  { month: "Dec", desktop: 214, mobile: 199 },
+  { month: "Nov", desktop: 214, mobile: 140 },
+  { month: "Dec", desktop: 214, mobile: 140 },
 ];
 
 export function Barchart() {
@@ -31,9 +31,10 @@ export function Barchart() {
   return (
     <div className="flex flex-col lg:flex-row gap-6 h-full">
       <div className="bg-white rounded-lg shadow-lg p-6 flex-1 lg:w-1/2">
-        <p className="text-sm text-gray-600 mb-6">January - Desember 2025</p>
+        <h2 className="text-2xl font-semibold mb-2">Crops By Month</h2>
+        <p className="text-sm text-gray-600 mb-6">January - Dec 2025</p>
         <div className="overflow-x-auto">
-          <BarChart width={1800} height={400} data={chartData}>
+          <BarChart width={800} height={300} data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="month"
@@ -46,8 +47,15 @@ export function Barchart() {
               cursor={false}
               content={<ChartTooltipContent indicator="dashed" />}
             />
-            <Bar dataKey="mobile" fill="yellow" radius={4} />
+            <Bar dataKey="desktop" fill="#34D399" radius={4} />
+            <Bar dataKey="mobile" fill="#FB923C" radius={4} />
           </BarChart>
+        </div>
+        <div className="text-sm text-gray-500 mt-4">
+          <div className="flex items-center gap-2 font-medium">
+            Increase up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          </div>
+          {/*<p>Showing total crops for the last 6 months</p>*/}
         </div>
       </div>
     </div>

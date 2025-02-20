@@ -65,7 +65,7 @@ export function Register() {
 
         <div className="mt-8">
           <AuthButton>Register</AuthButton>
-          <Togglepage onClick={handleToggle}>Login</Togglepage>
+          <Togglepage onClick={handleToggle}>Login Here</Togglepage>
         </div>
       </form>
     </div>

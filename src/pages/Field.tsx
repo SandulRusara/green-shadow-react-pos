@@ -1,18 +1,122 @@
 import { Addbutton } from "../components/Addbutton";
-
-import field from "../assets/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3drMTA0MDUxODUyLWltYWdlLWtwNmNlbzQ0LWtwNmRvNmJmLmpwZw.webp";
+import { Cards } from "../components/Cards";
 import { Modal } from "../components/Modal";
 import { Savebutton } from "../components/Savebutton";
 import { Updatebutton } from "../components/Updatebutton";
-
+import { Calender } from "../components/Calender";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, openModal } from "../reducers/ModalSlice";
 import { motion } from "motion/react";
 import { easeIn } from "motion";
+import { AppDispatch } from "../store/Store";
+import { useEffect, useState } from "react";
+import {
+  deleteField,
+  getAllFields,
+  saveField,
+  updateField,
+} from "../reducers/FieldReducer";
+import { FieldModel } from "../models/Field";
+import Swal from "sweetalert2";
 
 export function Field() {
-  const dispatch = useDispatch();
+  const url = "http://localhost:3000";
+
+  const dispatch = useDispatch<AppDispatch>();
   const isModalOpen = useSelector((state) => state.modal.isModalOpen);
+  const fields = useSelector((state) => state.field);
+
+  const initialFieldState = {
+    fieldName: "",
+    location: "",
+    extentSize: 0,
+    fieldImage: null,
+  };
+
+  const [field, setField] = useState<FieldModel>(initialFieldState);
+
+  const handleAdd = () => {
+    if (
+      !field.fieldImage ||
+      !field.fieldName ||
+      !field.location ||
+      !field.extentSize
+    ) {
+      alert("All Fields are required!");
+      return;
+    }
+
+    const fieldData = new FieldModel(
+      field.fieldName,
+      field.location,
+      field.extentSize,
+      field.fieldImage
+    );
+
+    dispatch(saveField(fieldData));
+    resetForm();
+    dispatch(closeModal());
+    Swal.fire({
+      icon: "success",
+      title: "Field Saved!",
+      text: "Your Field data has been successfully saved.",
+      confirmButtonText: "Ok",
+    });
+    dispatch(getAllFields());
+  };
+
+  const handleUpdate = () => {
+    if (!field.fieldName || !field.location || !field.extentSize) {
+      alert("All Fields are required!");
+      return;
+    }
+
+    const fieldData = new FieldModel(
+      field.fieldName,
+      field.location,
+      field.extentSize,
+      field.fieldImage
+    );
+
+    dispatch(updateField({ fieldName: field.fieldName, field: fieldData }));
+    resetForm();
+    dispatch(closeModal());
+    Swal.fire({
+      icon: "success",
+      title: "Field Updated!",
+      text: "Your Field data has been successfully updated.",
+      confirmButtonText: "Ok",
+    });
+    dispatch(getAllFields());
+  };
+
+  const handleDelete = (fieldName: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteField(fieldName));
+        dispatch(getAllFields());
+        Swal.fire("Deleted!", "The Field has been deleted.", "success");
+      }
+    });
+  };
+
+  const handleEdit = (field: FieldModel) => {
+    dispatch(openModal());
+    setField(field);
+  };
+
+  const resetForm = () => {
+    setField(initialFieldState);
+  };
 
   const handleAddField = () => {
     dispatch(openModal());
@@ -24,8 +128,13 @@ export function Field() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Field added!");
     dispatch(closeModal());
   };
+
+  useEffect(() => {
+    dispatch(getAllFields());
+  }, [dispatch, fields]);
   return (
     <>
       <motion.h1
@@ -33,7 +142,18 @@ export function Field() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
+        Field
       </motion.h1>
+      {/*<div className="flex flex-wrap gap-6">*/}
+      {/*  <div className="flex-grow">*/}
+      {/*    <Cards />*/}
+      {/*  </div>*/}
+      {/*  <div className="flex-shrink-0">*/}
+      {/*    <div className="relative h-full mr-10">*/}
+      {/*      <Calender />*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       <div className="flex justify-end mt-4 mr-56">
         <Addbutton onClick={handleAddField}>Field</Addbutton>
       </div>
@@ -52,10 +172,7 @@ export function Field() {
                 Field Name
               </th>
               <th scope="col" className="px-6 py-3">
-                Field Location (X)
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Field Location (Y)
+                Field Location
               </th>
               <th scope="col" className="px-6 py-3">
                 Extent Size
@@ -66,75 +183,47 @@ export function Field() {
             </tr>
           </thead>
           <tbody className="bg-slate-100 cursor-pointer">
-            <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">
-                <img src={field} alt="" className="w-24 h-24 rounded-full" />
-              </td>
-              <td className="px-6 py-4">saval</td>
-              <td className="px-6 py-4">matara</td>
-              <td className="px-6 py-4">galle</td>
-              <td className="px-6 py-4">67.0</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline"
+            {fields
+              .filter(
+                (field: FieldModel, index, self) =>
+                  index ===
+                  self.findIndex(
+                    (f: FieldModel) => f.fieldName === field.fieldName
+                  )
+              )
+              .map((field: FieldModel) => (
+                <tr
+                  key={field.fieldName}
+                  className="hover:bg-slate-200 border-b border-gray-950 font-bold"
                 >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline ml-2"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">
-                <img src={field} alt="" className="w-24 h-24 rounded-full" />
-              </td>
-              <td className="px-6 py-4">saval</td>
-              <td className="px-6 py-4">jaffna</td>
-              <td className="px-6 py-4">kalauatar</td>
-              <td className="px-6 py-4">56.1</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline ml-2"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">
-                <img src={field} alt="" className="w-24 h-24 rounded-full" />
-              </td>
-              <td className="px-6 py-4">saval</td>
-              <td className="px-6 py-4">colombo</td>
-              <td className="px-6 py-4">rathapura</td>
-              <td className="px-6 py-4">56.3</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline ml-2"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
+                  <td className="px-6 py-4">
+                    <img
+                      src={`${url}${field.fieldImage}`}
+                      alt={field.fieldName}
+                      className="w-24 h-24 rounded-full"
+                    />
+                  </td>
+                  <td className="px-6 py-4">{field.fieldName}</td>
+                  <td className="px-6 py-4">{field.location}</td>
+                  <td className="px-6 py-4">{field.extentSize} sq. ft.</td>
+                  <td className="px-6 py-4">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 hover:underline"
+                      onClick={() => handleEdit(field)}
+                    >
+                      Edit
+                    </a>
+                    <a
+                      href="#"
+                      className="font-medium text-red-600 hover:underline ml-2"
+                      onClick={() => handleDelete(field.fieldName)}
+                    >
+                      Remove
+                    </a>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </motion.div>
@@ -144,27 +233,54 @@ export function Field() {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label>Field Image</label>
-            <input type="file" accept="image/*" />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) =>
+                setField({
+                  ...field,
+                  fieldImage: e.target.files ? e.target.files[0] : null,
+                })
+              }
+            />
           </div>
           <div className="mb-4">
             <label>Field Name</label>
-            <input type="text" required />
+            <input
+              type="text"
+              name="fieldName"
+              value={field.fieldName}
+              onChange={(e) =>
+                setField({ ...field, fieldName: e.target.value })
+              }
+              required
+            />
           </div>
           <div className="mb-4">
-            <label>Field Location (X)</label>
-            <input type="text" required />
-          </div>
-          <div className="mb-4">
-            <label>Field Location (Y)</label>
-            <input type="text" required />
+            <label>Field Location</label>
+            <input
+              type="text"
+              name="location"
+              value={field.location}
+              onChange={(e) => setField({ ...field, location: e.target.value })}
+              required
+            />
           </div>
           <div className="mb-4">
             <label>Extent Size</label>
-            <input type="text" required />
+            <input
+              type="text"
+              name="extentSize"
+              value={field.extentSize}
+              onChange={(e) =>
+                setField({ ...field, extentSize: Number(e.target.value) })
+              }
+              required
+            />
           </div>
           <div className="flex justify-end">
-            <Savebutton>Save</Savebutton>
-            <Updatebutton>Update</Updatebutton>
+            <Savebutton handleClick={handleAdd}>Save Field</Savebutton>
+            <Updatebutton handleClick={handleUpdate}>Update Field</Updatebutton>
           </div>
         </form>
       </Modal>

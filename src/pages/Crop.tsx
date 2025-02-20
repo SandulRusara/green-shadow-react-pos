@@ -1,18 +1,133 @@
-
+import { Cards } from "../components/Cards";
 import { Addbutton } from "../components/Addbutton";
-import field from "../assets/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3drMTA0MDUxODUyLWltYWdlLWtwNmNlbzQ0LWtwNmRvNmJmLmpwZw.webp";
+
 import { Modal } from "../components/Modal";
 import { Savebutton } from "../components/Savebutton";
 import { Updatebutton } from "../components/Updatebutton";
-
+import { Calender } from "../components/Calender";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, openModal } from "../reducers/ModalSlice";
 import { motion } from "motion/react";
 import { easeIn } from "motion";
+import { AppDispatch } from "../store/Store";
+import { useEffect, useState } from "react";
+import { CropModel } from "../models/Crop";
+import {
+  deleteCrop,
+  getAllCrops,
+  saveCrop,
+  updateCrop,
+} from "../reducers/CropReducer";
+import { getFieldNames } from "../reducers/FieldReducer";
+import Swal from "sweetalert2";
 
 export function Crop() {
-  const dispatch = useDispatch();
+  const url = "http://localhost:3000";
+  const dispatch = useDispatch<AppDispatch>();
   const isModalOpen = useSelector((state) => state.modal.isModalOpen);
+  const crops = useSelector((state) => state.crop);
+  const fieldNames = useSelector((state) => state.field);
+
+  const initialCropState = {
+    commonName: "",
+    scientificName: "",
+    category: "",
+    cropImage: null,
+    fieldName: "",
+  };
+
+  const [crop, setCrop] = useState<CropModel>(initialCropState);
+
+  const handleAdd = () => {
+    if (
+      !crop.commonName ||
+      !crop.scientificName ||
+      !crop.category ||
+      !crop.cropImage ||
+      !crop.fieldName
+    ) {
+      alert("All Fields are required!");
+      return;
+    }
+
+    const cropData = new CropModel(
+      crop.commonName,
+      crop.scientificName,
+      crop.category,
+      crop.cropImage,
+      crop.fieldName
+    );
+
+    dispatch(saveCrop(cropData));
+    resetForm();
+    dispatch(closeModal());
+    Swal.fire({
+      icon: "success",
+      title: "Crop Saved!",
+      text: "Your crop data has been successfully saved.",
+      confirmButtonText: "Ok",
+    });
+    dispatch(getAllCrops());
+  };
+
+  const handleUpdate = () => {
+    if (
+      !crop.commonName ||
+      !crop.scientificName ||
+      !crop.category ||
+      !crop.fieldName
+    ) {
+      alert("All Fields are required!");
+      return;
+    }
+
+    const cropData = new CropModel(
+      crop.commonName,
+      crop.scientificName,
+      crop.category,
+      crop.cropImage,
+      crop.fieldName
+    );
+
+    dispatch(updateCrop({ commonName: crop.commonName, crop: cropData }));
+    resetForm();
+    dispatch(closeModal());
+    Swal.fire({
+      icon: "success",
+      title: "Crop Updated!",
+      text: "Your crop data has been successfully updated.",
+      confirmButtonText: "Ok",
+    });
+    dispatch(getAllCrops());
+  };
+
+  const handleDelete = (commonName: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteCrop(commonName));
+        dispatch(getAllCrops());
+        Swal.fire("Deleted!", "The crop has been deleted.", "success");
+      }
+    });
+  };
+
+  const handleEdit = (crop: CropModel) => {
+    dispatch(openModal());
+    setCrop(crop);
+  };
+
+  const resetForm = () => {
+    setCrop(initialCropState);
+  };
 
   const handleAddCrop = () => {
     dispatch(openModal());
@@ -27,6 +142,11 @@ export function Crop() {
     console.log("Crop added!");
     dispatch(closeModal());
   };
+
+  useEffect(() => {
+    dispatch(getAllCrops());
+    dispatch(getFieldNames());
+  }, [dispatch, fieldNames, crops]);
   return (
     <>
       <motion.h1
@@ -34,7 +154,18 @@ export function Crop() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
+        Crop
       </motion.h1>
+      {/*<div className="flex flex-wrap gap-6">*/}
+      {/*  <div className="flex-grow">*/}
+      {/*    <Cards />*/}
+      {/*  </div>*/}
+      {/*  <div className="flex-shrink-0">*/}
+      {/*    <div className="relative h-full mr-10">*/}
+      {/*      <Calender />*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       <div className="flex justify-end mt-4 mr-56">
         <Addbutton onClick={handleAddCrop}>Crop</Addbutton>
       </div>
@@ -59,9 +190,6 @@ export function Crop() {
                 Category
               </th>
               <th scope="col" className="px-6 py-3">
-                Season
-              </th>
-              <th scope="col" className="px-6 py-3">
                 Field Details
               </th>
               <th scope="col" className="px-6 py-3">
@@ -70,78 +198,48 @@ export function Crop() {
             </tr>
           </thead>
           <tbody className="bg-slate-100 cursor-pointer">
-            <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">
-                <img src={field} alt="" className="w-24 h-24 rounded-full" />
-              </td>
-              <td className="px-6 py-4">Red rice</td>
-              <td className="px-6 py-4">Red rice</td>
-              <td className="px-6 py-4">Fruit</td>
-              <td className="px-6 py-4">Winter</td>
-              <td className="px-6 py-4">nobby</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline"
+            {crops
+              .filter(
+                (crop: CropModel, index, self) =>
+                  index ===
+                  self.findIndex(
+                    (c: CropModel) => c.commonName === crop.commonName
+                  )
+              )
+              .map((crop: CropModel) => (
+                <tr
+                  key={crop.commonName}
+                  className="hover:bg-slate-200 border-b border-gray-950 font-bold"
                 >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline ml-2"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">
-                <img src={field} alt="" className="w-24 h-24 rounded-full" />
-              </td>
-              <td className="px-6 py-4">Red rice</td>
-              <td className="px-6 py-4">Red rice</td>
-              <td className="px-6 py-4">Fruit</td>
-              <td className="px-6 py-4">Winter</td>
-              <td className="px-6 py-4">nobby </td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline ml-2"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr className="hover:bg-slate-200 border-b border-gray-950 font-bold">
-              <td className="px-6 py-4">
-                <img src={field} alt="" className="w-24 h-24 rounded-full" />
-              </td>
-              <td className="px-6 py-4">Red rice</td>
-              <td className="px-6 py-4">Red rice</td>
-              <td className="px-6 py-4">Fruit</td>
-              <td className="px-6 py-4">Winter</td>
-              <td className="px-6 py-4">nobby</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline ml-2"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
+                  <td className="px-6 py-4">
+                    <img
+                      src={`${url}${crop.cropImage}`}
+                      alt={crop.commonName}
+                      className="w-24 h-24 rounded-full"
+                    />
+                  </td>
+                  <td className="px-6 py-4">{crop.commonName}</td>
+                  <td className="px-6 py-4">{crop.scientificName}</td>
+                  <td className="px-6 py-4">{crop.category}</td>
+                  <td className="px-6 py-4">{crop.fieldName}</td>
+                  <td className="px-6 py-4">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 hover:underline"
+                      onClick={() => handleEdit(crop)}
+                    >
+                      Edit
+                    </a>
+                    <a
+                      href="#"
+                      className="font-medium text-red-600 hover:underline ml-2"
+                      onClick={() => handleDelete(crop.commonName)}
+                    >
+                      Remove
+                    </a>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </motion.div>
@@ -152,31 +250,68 @@ export function Crop() {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label>Crop Image</label>
-            <input type="file" accept="image/*" />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) =>
+                setCrop({
+                  ...crop,
+                  cropImage: e.target.files ? e.target.files[0] : null,
+                })
+              }
+            />
           </div>
           <div className="mb-4">
             <label>Common Name</label>
-            <input type="text" required />
+            <input
+              type="text"
+              name="commonName"
+              value={crop.commonName}
+              onChange={(e) => setCrop({ ...crop, commonName: e.target.value })}
+              required
+            />
           </div>
           <div className="mb-4">
             <label>Scientific Name</label>
-            <input type="text" required />
+            <input
+              type="text"
+              name="scientificName"
+              value={crop.scientificName}
+              onChange={(e) =>
+                setCrop({ ...crop, scientificName: e.target.value })
+              }
+              required
+            />
           </div>
           <div className="mb-4">
             <label>Category</label>
-            <input type="text" required />
-          </div>
-          <div className="mb-4">
-            <label>Season</label>
-            <input type="text" required />
+            <input
+              type="text"
+              name="category"
+              value={crop.category}
+              onChange={(e) => setCrop({ ...crop, category: e.target.value })}
+              required
+            />
           </div>
           <div className="mb-4">
             <label>Field Details</label>
-            <select name="" id=""></select>
+            <select
+              name="fieldName"
+              value={crop.fieldName}
+              onChange={(e) => setCrop({ ...crop, fieldName: e.target.value })}
+              id=""
+            >
+              <option value="">Select Field</option>
+              {fieldNames.map((field: FieldModel, index) => (
+                <option key={index} value={field}>
+                  {field}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="flex justify-end">
-            <Savebutton>Save Crop</Savebutton>
-            <Updatebutton>Update Crop</Updatebutton>
+            <Savebutton handleClick={handleAdd}>Save Crop</Savebutton>
+            <Updatebutton handleClick={handleUpdate}>Update Crop</Updatebutton>
           </div>
         </form>
       </Modal>
