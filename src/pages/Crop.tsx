@@ -32,7 +32,7 @@ export function Crop() {
     scientificName: "",
     category: "",
     cropImage: null,
-    fieldName: "",
+    fieldId: "",
   };
 
   const [crop, setCrop] = useState<CropModel>(initialCropState);
@@ -43,7 +43,7 @@ export function Crop() {
       !crop.scientificName ||
       !crop.category ||
       !crop.cropImage ||
-      !crop.fieldName
+      !crop.fieldId
     ) {
       alert("All Fields are required!");
       return;
@@ -54,7 +54,7 @@ export function Crop() {
       crop.scientificName,
       crop.category,
       crop.cropImage,
-      crop.fieldName
+      crop.fieldId
     );
 
     dispatch(saveCrop(cropData));
@@ -74,7 +74,7 @@ export function Crop() {
       !crop.commonName ||
       !crop.scientificName ||
       !crop.category ||
-      !crop.fieldName
+      !crop.fieldId
     ) {
       alert("All Fields are required!");
       return;
@@ -85,7 +85,7 @@ export function Crop() {
       crop.scientificName,
       crop.category,
       crop.cropImage,
-      crop.fieldName
+      crop.fieldId
     );
 
     dispatch(updateCrop({ commonName: crop.commonName, crop: cropData }));
@@ -146,6 +146,8 @@ export function Crop() {
     dispatch(getAllCrops());
     dispatch(getFieldNames());
   }, [dispatch, fieldNames, crops]);
+
+
   return (
     <>
       <motion.h1
@@ -167,24 +169,24 @@ export function Crop() {
       >
         <table className="w-full text-sm text-left rtl:text-right text-black">
           <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3"></th>
-              <th scope="col" className="px-6 py-3">
-                Common Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Scientific Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Category
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Field Details
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Actions
-              </th>
-            </tr>
+          <tr>
+            <th scope="col" className="px-6 py-3"></th>
+            <th scope="col" className="px-6 py-3">
+              Common Name
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Scientific Name
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Category
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Field Details
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Actions
+            </th>
+          </tr>
           </thead>
           <tbody className="bg-slate-100 cursor-pointer">
             {crops
@@ -210,7 +212,7 @@ export function Crop() {
                   <td className="px-6 py-4">{crop.commonName}</td>
                   <td className="px-6 py-4">{crop.scientificName}</td>
                   <td className="px-6 py-4">{crop.category}</td>
-                  <td className="px-6 py-4">{crop.fieldName}</td>
+                  <td className="px-6 py-4">{crop.fieldId}</td>
                   <td className="px-6 py-4">
                     <a
                       href="#"
@@ -230,6 +232,9 @@ export function Crop() {
                 </tr>
               ))}
           </tbody>
+
+
+
         </table>
       </motion.div>
 
@@ -240,64 +245,84 @@ export function Crop() {
           <div className="mb-4">
             <label>Crop Image</label>
             <input
-              type="file"
-              accept="image/*"
-              onChange={(e) =>
-                setCrop({
-                  ...crop,
-                  cropImage: e.target.files ? e.target.files[0] : null,
-                })
-              }
+                type="file"
+                accept="image/*"
+                onChange={(e) =>
+                    setCrop({
+                      ...crop,
+                      cropImage: e.target.files ? e.target.files[0] : null,
+                    })
+                }
             />
           </div>
           <div className="mb-4">
             <label>Common Name</label>
             <input
-              type="text"
-              name="commonName"
-              value={crop.commonName}
-              onChange={(e) => setCrop({ ...crop, commonName: e.target.value })}
-              required
+                type="text"
+                name="commonName"
+                value={crop.commonName}
+                onChange={(e) => setCrop({...crop, commonName: e.target.value})}
+                required
             />
           </div>
           <div className="mb-4">
             <label>Scientific Name</label>
             <input
-              type="text"
-              name="scientificName"
-              value={crop.scientificName}
-              onChange={(e) =>
-                setCrop({ ...crop, scientificName: e.target.value })
-              }
-              required
+                type="text"
+                name="scientificName"
+                value={crop.scientificName}
+                onChange={(e) =>
+                    setCrop({...crop, scientificName: e.target.value})
+                }
+                required
             />
           </div>
           <div className="mb-4">
             <label>Category</label>
             <input
-              type="text"
-              name="category"
-              value={crop.category}
-              onChange={(e) => setCrop({ ...crop, category: e.target.value })}
-              required
+                type="text"
+                name="category"
+                value={crop.category}
+                onChange={(e) => setCrop({...crop, category: e.target.value})}
+                required
             />
           </div>
+          {/*<div className="mb-4">*/}
+          {/*  <label>Field Details</label>*/}
+          {/*  <select*/}
+          {/*    name="fieldName"*/}
+          {/*    value={crop.fieldId}*/}
+          {/*    onChange={(e) => setCrop({ ...crop, fieldName: e.target.value })}*/}
+          {/*    id=""*/}
+          {/*  >*/}
+          {/*    <option value="">Select Field</option>*/}
+          {/*    {fieldNames.map((field: FieldModel, index) => (*/}
+          {/*      <option key={index} value={field}>*/}
+          {/*        {field}*/}
+          {/*      </option>*/}
+          {/*    ))}*/}
+          {/*  </select>*/}
+          {/*</div>*/}
+
           <div className="mb-4">
             <label>Field Details</label>
             <select
-              name="fieldName"
-              value={crop.fieldName}
-              onChange={(e) => setCrop({ ...crop, fieldName: e.target.value })}
-              id=""
+                name="fieldName"
+                value={crop.fieldId}
+                onChange={(e) => setCrop({...crop, fieldId: e.target.value})}
+                required
+                autoFocus
             >
               <option value="">Select Field</option>
-              {fieldNames.map((field: FieldModel, index) => (
-                <option key={index} value={field}>
-                  {field}
-                </option>
+              {[1, 2, 3, 4, 5].map((fieldNumber) => (
+                  <option key={fieldNumber} value={fieldNumber}>
+                    {fieldNumber}
+                  </option>
               ))}
             </select>
           </div>
+
+
           <div className="flex justify-end">
             <Savebutton handleClick={handleAdd}>Save Crop</Savebutton>
             <Updatebutton handleClick={handleUpdate}>Update Crop</Updatebutton>
@@ -307,3 +332,4 @@ export function Crop() {
     </>
   );
 }
+

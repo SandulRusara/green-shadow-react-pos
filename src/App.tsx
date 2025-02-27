@@ -8,7 +8,7 @@ import { Staff } from "./pages/Staff";
 import { Equipment } from "./pages/Equipment";
 import { Log } from "./pages/Log";
 import { Vehicle } from "./pages/Vehicle";
-import { Login } from "./pages/Login";
+import { Login } from "./pages/Login.tsx";
 import { Register } from "./pages/Register";
 
 function App() {

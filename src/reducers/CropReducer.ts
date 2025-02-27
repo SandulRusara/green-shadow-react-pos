@@ -26,31 +26,62 @@ export const getCropNames = createAsyncThunk("crop/getCropNames", async () => {
   }
 });
 
+// export const saveCrop = createAsyncThunk(
+//   "crop/saveCrop",
+//   async (crop: CropModel) => {
+//     try {
+//       const formData = new FormData();
+//
+//
+//       formData.append("commonName", crop.commonName);
+//       formData.append("scientificName", crop.scientificName);
+//       formData.append("category", crop.category);
+//       formData.append("fieldName", crop.fieldName);
+//       if (crop.cropImage) {
+//         formData.append("cropImage", crop.cropImage);
+//       }
+//
+//       const response = await api.post("/add", formData, {
+//         headers: {
+//           "Content-Type": "multipart/form-data",
+//         },
+//       });
+//       return response.data;
+//     } catch (error) {
+//       return console.log(error);
+//     }
+//   }
+// );
+
 export const saveCrop = createAsyncThunk(
-  "crop/saveCrop",
-  async (crop: CropModel) => {
-    try {
-      const formData = new FormData();
+    "crop/saveCrop",
+    async (crop: CropModel) => {
+      try {
+        const formData = new FormData();
 
-      formData.append("commonName", crop.commonName);
-      formData.append("scientificName", crop.scientificName);
-      formData.append("category", crop.category);
-      formData.append("fieldName", crop.fieldName);
-      if (crop.cropImage) {
-        formData.append("cropImage", crop.cropImage);
+        formData.append("commonName", crop.commonName);
+        formData.append("scientificName", crop.scientificName);
+        formData.append("category", crop.category);
+        formData.append("fieldId", String(crop.fieldId)); // Ensure it's correctly named as "fieldId"
+
+        if (crop.cropImage instanceof File) {
+          formData.append("cropImage", crop.cropImage); // Ensure it's a File object before appending
+        }
+
+        const response = await api.post("/add", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        return response.data;
+      } catch (error) {
+        console.error("Error saving crop:", error);
+        throw error; // Ensure error handling works correctly
       }
-
-      const response = await api.post("/add", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      return response.data;
-    } catch (error) {
-      return console.log(error);
     }
-  }
 );
+
 
 export const updateCrop = createAsyncThunk(
   "crop/updateCrop",
@@ -61,7 +92,7 @@ export const updateCrop = createAsyncThunk(
       formData.append("commonName", payload.crop.commonName);
       formData.append("scientificName", payload.crop.scientificName);
       formData.append("category", payload.crop.category);
-      formData.append("fieldName", payload.crop.fieldName);
+      formData.append("fieldName", payload.crop.fieldId);
       if (payload.crop.cropImage) {
         formData.append("cropImage", payload.crop.cropImage);
       }
